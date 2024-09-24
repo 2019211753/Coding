@@ -1,4 +1,5 @@
 # AcWing.786
+
 def kth(array: list, k: int):
     return
 
