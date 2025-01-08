@@ -1,3 +1,4 @@
+# LeetCode 01
 class Solution:
     def twoSum(self, nums: list, target: int) -> list:
         dict = {} # python dict×Ô´øsearchºÍinsert
