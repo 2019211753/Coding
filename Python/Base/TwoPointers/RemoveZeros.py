@@ -2,6 +2,7 @@
 from typing import List
 
 class Solution:
+    # no efficient
     # def moveZeroes(self, nums: List[int]) -> None:
     #     """
     #     Do not return anything, modify nums in-place instead.
@@ -20,6 +21,7 @@ class Solution:
     #         j = j - k + i - 1
     #         print(f'i:{i}, j:{j}, k:{k}')
 
+    # efficient o(n)
     def moveZeroes(self, nums: List[int]) -> None:
         n = len(nums)
         left = right = 0
