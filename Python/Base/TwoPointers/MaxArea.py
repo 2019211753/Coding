@@ -26,6 +26,7 @@ class Solution:
             # if height[i] <= height[j] at initial, any other j can't be higher because the distance j - i is the largest
             # and max(min(height[i] <= height[j]) for any j can't be higher. Thus move the right pointer, store
             # current are as the minimum maximum area
+            # 双指针移动后的结果一定是单调的，贪婪的
             if height[i] <= height[j]:
                 i += 1
             else:
