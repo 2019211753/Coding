@@ -8,7 +8,7 @@ from typing import List
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        nums.sort()  # Sort the array to facilitate the two-pointer approach
+        nums.sort()  # Sort the array to facilitate the two-pointer approach and avoid repeated calculation
         result = []
         n = len(nums)
 
