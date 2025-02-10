@@ -1,0 +1,35 @@
+# LeetCode 23
+# 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
+
+from typing import List, Optional
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+class Solution:
+    # 迭代
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        curr = head
+        while curr is not None:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+        return prev
+
+    # 递归
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return None
+        elif head.next is None:
+            return head
+        else:
+            reversed_head = self.reverseList(head.next)
+            head.next.next = head
+            head.next = None
+            return reversed_head
+

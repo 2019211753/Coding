@@ -7,37 +7,22 @@ from typing import List
 
 
 class Solution:
+    # z字查找。之所以从右上角开始查，是因为判断大小后，可以得到确定性的方块区域，左下角也可以，从左上角和右下角就不行。
+    # 整个矩阵进行二分不可行，不能直接像一维数组那样，一次二分就能确定目标位置。太复杂了，需要用分治法将矩阵分割为多个区域
+    # 但这种方式较复杂且不容易实现。可以对每行进行二分。
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        m, n = len(matrix) - 1, len(matrix[0]) - 1
-        h_m, h_n = m, n
-        l_m, l_n = 0, 0
-        while l_m <= h_m and l_n <= h_n:
-            m_m, m_n = (h_m + l_m) // 2, (h_n + l_n) // 2
-            if matrix[m_m][m_n] > target:
-                h_m, h_n = m_m - 1, m_n - 1
-            elif matrix[m_m][m_n] < target:
-                l_m, l_n = m_m + 1, m_n + 1
-            else:
-                return True
-        if l_m <= m and l_n <= n:
-            for i in range(l_m + 1):
-                if matrix[i][l_n] == target:
-                    return True
-            for j in range(l_n + 1):
-                if matrix[l_m][j] == target:
-                    return True
+        if not matrix or not matrix[0]:  # 防止空矩阵
             return False
-        if l_m <= m:
-            for i in range(l_m, m + 1):
-                if matrix[i][l_n - 1] == target:
-                    return True
-            return False
-        if l_n <= n:
-            for i in range(l_n, n + 1):
-                if matrix[l_m - 1][i] == target:
-                    return True
-            return False
-        return False
 
-solution = Solution()
-solution.searchMatrix([[1,2,3,4,5]], 2)
+        m, n = len(matrix), len(matrix[0])  # 获取行数和列数
+        row, col = 0, n - 1  # 从右上角开始
+
+        while row < m and col >= 0:
+            if matrix[row][col] == target:
+                return True
+            elif matrix[row][col] > target:
+                col -= 1  # 当前值太大，列左移
+            else:
+                row += 1  # 当前值太小，行下移
+
+        return False  # 没找到
