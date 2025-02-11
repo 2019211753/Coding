@@ -29,7 +29,7 @@ class Solution:
             return head
         else:
             reversed_head = self.reverseList(head.next)
-            head.next.next = head
+            head.next.next = head # head.next即为反转链表的尾部
             head.next = None
             return reversed_head
 
