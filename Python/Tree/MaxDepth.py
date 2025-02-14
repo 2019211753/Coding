@@ -29,6 +29,7 @@ class Solution:
         help(root, 1)
         return result
 
+    # 更简洁
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         def help(node, depth):
             if not node:
