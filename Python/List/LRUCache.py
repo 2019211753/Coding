@@ -8,7 +8,7 @@
 # 函数 get 和 put 必须以 O(1) 的平均时间复杂度运行。
 from linecache import cache
 
-import collectionscodi
+import collections
 
 # 我写的
 class LRUCache:
