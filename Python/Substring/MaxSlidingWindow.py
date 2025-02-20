@@ -26,7 +26,7 @@ class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         n = len(nums)
         q = collections.deque()
-        for i in range(k): # 队列中左到右 i < j 且 nums[i] > nums[j]
+        for i in range(k): # 队列中左到右 i < j 且 nums[i] > nums[j]，使得单调递减
             while q and nums[i] >= nums[q[-1]]:
                 q.pop()
             q.append(i)

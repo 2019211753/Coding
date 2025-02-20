@@ -3,7 +3,7 @@
 from typing import List
 
 class Solution:
-    # 动态规划维护左侧右侧最大高度 时间复杂度o(n) 空间复杂度o(n)
+    # 动态规划维护左侧右侧（包括当前）最大高度 时间复杂度o(n) 空间复杂度o(n)
     def trap(self, height: List[int]) -> int:
         if not height:
             return 0
@@ -29,11 +29,11 @@ class Solution:
         while left < right:
             leftMax = max(leftMax, height[left])
             rightMax = max(rightMax, height[right])
-            if height[left] < height[right]:
+            if height[left] < height[right]: # 初始状态 最左最右柱子分别是leftmax和rightmax，如果右>左，则右所有柱子>最右>左最小，左右
                 ans += leftMax - height[left]
                 left += 1
             else:
-                ans += rightMax - height[right]
+                ans += rightMax - height[right] # 反过来
                 right -= 1
 
         return ans
