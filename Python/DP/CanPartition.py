@@ -35,8 +35,9 @@ class Solution:
         dp = [False] * (target + 1)
         dp[0] = True  # 和为0总是可以通过不选择任何数字得到
 
-        # 遍历每个数字 逆序遍历以防止状态被覆盖
-        # [num, target] 只考虑当前数字num到target之间的dp[i]，保证每次计算 dp[j] 时，都使用的是当前数字加入前的状态，确保每个数字只被用一次。
+        # 遍历每个数字，如果遍历dp，内循环遍历数字的话，[1, 2, 5]时，dp[3]为True
+        # 逆序遍历，只考虑当前数字num到target之间的dp[i]，保证每次计算 dp[j] 时，都使用的是当前数字加入前的状态，确保每个数字只被用一次。
+        # 避免出现 num = 2时，4-2=2的情况。
         for num in nums:
             for curr_sum in range(target, num - 1, -1):
                 dp[curr_sum] = dp[curr_sum] or dp[curr_sum - num]
