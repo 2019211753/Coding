@@ -17,3 +17,26 @@ class Solution:
 
         return result
 
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        n, m = len(s), len(p)
+        if n < m:
+            return []
+        result = []
+        word = [0] * 26
+        window = [0] * 26
+        for i, x in enumerate(p):
+            word[ord(x) - ord('a')] += 1
+        for i in range(m):
+            window[ord(s[i]) - ord('a')] += 1
+        if window == word:
+            result.append(0)
+        for i in range(m, n):
+            window[ord(s[i - m]) - ord('a')] -= 1
+            window[ord(s[i]) - ord('a')] += 1
+            if window == word:
+                result.append(i - m + 1)
+
+        return result
+
+
+
