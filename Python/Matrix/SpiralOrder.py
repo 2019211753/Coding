@@ -5,17 +5,22 @@ from typing import List
 
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        m, n = len(matrix), len(matrix[0])
+        n, m = len(matrix), len(matrix[0])
+        s = min(n, m) // 2
         result = []
-        s = min(m // 2, n // 2)
         for i in range(s):
-            result.extend(matrix[i][i: n - i])  # 从左到右
-            result.extend([matrix[j][n - i - 1] for j in range(i + 1, m - i)])  # 从上到下
-            result.extend(matrix[m - i - 1][n - i - 2: i - 1 if i > 0 else None: -1])  # 从右到左
-            result.extend([matrix[j][i] for j in range(m - i - 2, i, -1)])  # 从下到上
-        if 2 * s < m and 2 * s < n:
-            if m <= n:
-                result.extend(matrix[s][s: n - s]) # 从左到右
-            else:
-                result.extend([matrix[j][n - s - 1] for j in range(s, m - s)])  # 从上到下
+            for j in range(i, m - i):
+                result.append(matrix[i][j])
+            for j in range(i + 1, n - i):
+                result.append(matrix[j][m - i - 1])
+            for j in range(m - i - 2, i - 1, -1):
+                result.append(matrix[n - i - 1][j])
+            for j in range(n - i - 2, i, -1):
+                result.append(matrix[j][i])
+        print(result)
+        if m >= n > 2 * s:
+            result.extend(matrix[s][s: m - s])
+        elif n > m > 2 * s:
+            result.extend([matrix[k][s] for k in range(s, n - s)])
         return result
+

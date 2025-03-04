@@ -33,3 +33,17 @@ class Solution:
             head.next = None
             return reversed_head
 
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def help(node):
+            nonlocal dummy
+            if node:
+               help(node.next)
+               node.next = None
+               dummy.next = node
+               dummy = node
+
+        dummy_head = dummy = ListNode(0)
+        dummy.next = None
+        help(head)
+        return dummy_head.next
+

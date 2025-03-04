@@ -48,4 +48,25 @@ class Solution:
         # 最终指针A和B相遇的地方就是交点，如果没有交点，返回None
         return pointerA
 
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        a, b = 0, 0
+        node_a, node_b = headA, headB
+        while node_a:
+            a += 1
+            node_a = node_a.next
+        while node_b:
+            b += 1
+            node_b = node_b.next
+        if a < b:
+            headA, headB = headB, headA
+            a, b = b, a
+        for _ in range(a - b):
+            headA = headA.next
+        while headA and headB:
+            if headA == headB:
+                return headA
+            headA = headA.next
+            headB = headB.next
+
+        return None
 

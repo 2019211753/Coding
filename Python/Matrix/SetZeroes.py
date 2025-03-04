@@ -6,19 +6,32 @@ from typing import List
 
 class Solution:
     def setZeroes(self, matrix: List[List[int]]) -> None:
-        m, n = len(matrix), len(matrix[0])
-        flag_col0 = False
-
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n, m = len(matrix), len(matrix[0])
+        flag = False
         for i in range(m):
-            if matrix[i][0] == 0:
-                flag_col0 = True
-            for j in range(1, n):
+            if matrix[0][i] == 0:
+                flag = True
+        for i in range(1, n):
+            for j in range(m):
                 if matrix[i][j] == 0:
-                    matrix[i][0] = matrix[0][j] = 0
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+        for i in range(1, n):
+            if matrix[i][0] == 0:
+                matrix[i][:] = [0] * m
+        for j in range(m):
+            if matrix[0][j] == 0:
+                for row in matrix:
+                    row[j] = 0
+        if matrix[0][0] == 0:
+            for row in matrix:
+                row[0] = 0
+        if flag:
+            matrix[0][:] = [0] * m
 
-        for i in range(m - 1, -1, -1):
-            for j in range(1, n):
-                if matrix[i][0] == 0 or matrix[0][j] == 0:
-                    matrix[i][j] = 0
-            if flag_col0:
-                matrix[i][0] = 0
+
+solution = Solution()
+solution.setZeroes([[0,1,2,0],[3,4,5,2],[1,3,1,5]])

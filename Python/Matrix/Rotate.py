@@ -10,7 +10,24 @@ from typing import List
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
         n = len(matrix)
+        s = n // 2
+        for i in range(s):
+            for j in range(i, n - 1 - i):
+                temp = matrix[i][j]
+                matrix[i][j] = matrix[n - 1 - j][i]
+                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j]
+                matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i]
+                matrix[j][n - 1 - i] = temp
+
+    # 翻转代替旋转
+    def rotate(self, matrix: List[List[int]]) -> None:
+        n = len(matrix)
+        # 水平翻转
         for i in range(n // 2):
-            for j in range((n + 1) // 2):
-                matrix[i][j], matrix[n - j - 1][i], matrix[n - i - 1][n - j - 1], matrix[j][n - i - 1] \
-                    = matrix[n - j - 1][i], matrix[n - i - 1][n - j - 1], matrix[j][n - i - 1], matrix[i][j]
+            for j in range(n):
+                matrix[i][j], matrix[n - i - 1][j] = matrix[n - i - 1][j], matrix[i][j]
+        # 主对角线翻转
+        for i in range(n):
+            for j in range(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+

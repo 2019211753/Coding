@@ -47,3 +47,21 @@ class Solution:
 
         # 如果没有环，返回 None
         return None
+
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return None
+        slow, fast = head, head.next
+        while slow and fast and fast.next:
+            if slow != fast:
+                slow = slow.next
+                fast = fast.next.next
+                print(slow.val)
+            else:
+                slow = head
+                fast = fast.next
+                while slow != fast:
+                    slow = slow.next
+                    fast = fast.next
+                return slow
+        return None

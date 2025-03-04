@@ -34,7 +34,7 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
 
-        # 2. 反转后半部分链表
+        # 2. 反转后半部分链表 slow算在前半部分链表里
         prev = None
         while slow:
             next_node = slow.next
@@ -44,7 +44,7 @@ class Solution:
 
         # 3. 比较前半部分和反转后的后半部分
         left, right = head, prev
-        while right:  # 只需要比较右半部分即可
+        while right:  # 只需要比较右半部分即可 右半部分长度肯定小于等于左半部分
             if left.val != right.val:
                 return False
             left = left.next
@@ -52,7 +52,7 @@ class Solution:
 
         return True
 
-    # 递归，空间复杂度o(1)
+    # 递归，空间复杂度o(n)
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         # 用于递归过程中回溯的辅助函数
         def helper(node):
